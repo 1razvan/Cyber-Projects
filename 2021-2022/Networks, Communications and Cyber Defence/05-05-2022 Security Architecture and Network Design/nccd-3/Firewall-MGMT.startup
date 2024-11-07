@@ -1,0 +1,41 @@
+ifconfig eth0 192.168.0.1/24
+ifconfig eth1 129.11.4.3/24
+ifconfig eth2 192.168.50.1/24
+ifconfig eth3 192.168.60.1/24
+ifconfig eth4 192.168.70.1/24
+ifconfig eth5 192.168.80.1/24
+
+route add default gw 192.168.50.2
+
+ip route add 192.168.1.0/24 via 192.168.50.2
+ip route add 192.168.2.0/24 via 192.168.60.2
+ip route add 192.168.3.0/24 via 192.168.70.2
+ip route add 192.168.4.0/24 via 192.168.80.2
+
+echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.conf                                              # Blocks all pesky ipv6 traffic
+echo 'net.ipv6.conf.default.disable_ipv6 = 1' >> /etc/sysctl.conf
+
+useradd -p $(openssl passwd -crypt password) admin
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+# ---------------------- FIREWALL CONFIG ----------------
+
+ip6tables -P INPUT DROP                                                                                    # And if it gets through block it again anyway
+ip6tables -P FORWARD DROP
+ip6tables -P OUTPUT DROP
+
+iptables -P FORWARD DROP
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+
+iptables -A FORWARD -s 192.168.0.2 -j ACCEPT                                          # Allows everything through from admin
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT             	 # Allows everything to go back to admin only if initiated
+
+iptables -A INPUT -s 192.168.0.2 -j ACCEPT                                            # Allows everything in from admin
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT                     # Allow anything out if requested
+
+iptables -P INPUT ACCEPT                                                           # stops random people from crashing in
+
+iptables -A INPUT ! -s 192.168.0.2 -p tcp --dport 22 -j DROP                       # accept anything from admin

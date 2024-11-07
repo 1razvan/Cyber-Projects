@@ -1,0 +1,15 @@
+ifconfig eth0 192.168.1.2/24
+route add default gw 192.168.1.1
+
+touch /var/log/squid/access.log
+chmod 777 /var/log/squid/access.log
+systemctl start squid.service
+
+useradd -p $(openssl passwd -crypt password) admin
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+iptables -P INPUT ACCEPT                                                           # stops random people from crashing in
+
+iptables -A INPUT ! -s 192.168.0.2 -p tcp --dport 22 -j DROP                       # accept anything from admin

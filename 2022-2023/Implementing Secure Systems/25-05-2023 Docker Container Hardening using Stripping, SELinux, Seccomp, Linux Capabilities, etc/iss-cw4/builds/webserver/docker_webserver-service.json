@@ -1,0 +1,112 @@
+{
+	"defaultAction": "SCMP_ACT_ERRNO",
+	"archMap": [
+		{
+			"architecture": "SCMP_ARCH_X86_64",
+			"subArchitectures": [
+				"SCMP_ARCH_X86",
+				"SCMP_ARCH_X32"
+			]
+		}
+	],
+	"syscalls": [
+		{
+			"names": [
+				"accept",
+				"accept4",
+				"access",
+				"bind",
+				"capget",
+				"capset",
+				"chdir",
+				"chown",
+				"close",
+				"connect",
+				"creat",
+				"dup2",
+				"epoll_create",
+				"epoll_ctl",
+				"epoll_wait",
+				"epoll_wait_old",
+				"execve",
+				"faccessat",
+				"fchdir",
+				"fcntl",
+				"fstat",
+				"fstatfs",
+				"futex",
+				"getdents",
+				"getdents64",
+				"getpgrp",
+				"getppid",
+				"getrlimit",
+				"getsockopt",
+				"ioctl",
+				"listen",
+				"lstat",
+				"mkdir",
+				"mmap",
+				"mprotect",
+				"newfstatat",
+				"open",
+				"openat",
+				"poll",
+				"prctl",
+				"pipe2",
+				"pread64",
+				"read",
+				"readv",
+				"recvfrom",
+				"rt_sigaction",
+				"rt_sigprocmask",
+				"rt_sigreturn",
+				"sendto",
+				"setgid",
+				"setgroups",
+				"setsid",
+				"setsockopt",
+				"shutdown",
+				"setuid",
+				"socket",
+				"socketpair",
+				"stat",
+				"uname",
+				"wait4",
+				"write",
+				"writev",
+				"umask"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"comment": ""
+		},
+		{
+			"names": [
+				"arch_prctl"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"args": [],
+			"comment": "",
+			"includes": {
+				"arches": [
+					"amd64",
+					"x32"
+				]
+			}
+		},
+		{
+			"names": [
+				"clone"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"args": [
+				{
+					"index": 0,
+					"value": 2114060288,
+					"op": "SCMP_CMP_MASKED_EQ"
+				}
+			],
+			"comment": ""
+		}
+	]
+}
+

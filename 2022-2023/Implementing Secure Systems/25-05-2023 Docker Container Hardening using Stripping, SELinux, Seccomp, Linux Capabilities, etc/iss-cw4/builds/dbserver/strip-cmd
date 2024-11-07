@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Invoke the strip-image script and pass parameters (v7: 70.7MB)
+sudo ./strip-image  \
+  -i iss2023/bravo-4-db_i \
+  -f /usr/local/bin/docker-entrypoint.sh \
+  -f /usr/local/bin/gosu \
+  -f /usr/share/mysql/fill_help_tables.sql \
+  -f /usr/share/mysql/mysql_system_tables.sql \
+  -f /usr/share/mysql/mysql_system_tables_data.sql \
+  -f /usr/share/mysql/mysql_performance_tables.sql \
+  -f /usr/share/mysql/maria_add_gis_sp_bootstrap.sql \
+  -f /usr/share/mysql/mysql_test_data_timezone.sql \
+  -f /usr/share/mysql/mysql_test_db.sql \
+  -f /usr/share/mysql/mysql_sys_schema.sql \
+  -f /usr/sbin/mysqld \
+  -f /usr/bin/my_print_defaults \
+  -f /bin/awk \
+  -f /bin/cat \
+  -f /bin/chown \
+  -f /bin/date \
+  -f /bin/find \
+  -f /bin/id \
+  -f /bin/ls \
+  -f /bin/sed \
+  -f /bin/sleep \
+  -f /bin/resolveip \
+  -f /bin/mariadb-install-db \
+  -f /bin/bash \
+  -f /bin/chmod \
+  -f /bin/mkdir \
+  -f /bin/mysql \
+  -f /bin/sh \
+  -f /run/mysqld/ \
+  -f /docker-entrypoint-initdb.d \
+  -f /mysql/mysql.conf.d/mysqld.cnf \
+  -f /etc/passwd \
+  -f /tmp/ \
+  -d Dockerfile \
+  -t iss2023/bravo-4-db-stripped_i \
+  -v \

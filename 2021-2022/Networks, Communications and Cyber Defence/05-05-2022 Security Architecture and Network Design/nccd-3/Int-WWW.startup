@@ -1,0 +1,15 @@
+ifconfig eth0 192.168.1.4/24
+route add default gw 192.168.1.1
+
+useradd -p $(openssl passwd -crypt password) admin
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+a2enmod ssl
+a2ensite default-ssl
+service apache2 start
+
+iptables -P INPUT ACCEPT                                                           # stops random people from crashing in
+
+iptables -A INPUT ! -s 192.168.0.2 -p tcp --dport 22 -j DROP                       # accept anything from admin

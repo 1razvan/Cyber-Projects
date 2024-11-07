@@ -1,0 +1,14 @@
+ifconfig eth0 192.168.3.3/24
+route add default gw 192.168.3.1
+
+useradd -p $(openssl passwd -crypt password) admin
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+chmod +r /etc/dnsmasq_static_hosts.conf
+service dnsmasq start
+
+iptables -P INPUT ACCEPT                                                           # stops random people from crashing in
+
+iptables -A INPUT ! -s 192.168.0.2 -p tcp --dport 22 -j DROP                       # accept anything from admin

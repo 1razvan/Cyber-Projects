@@ -1,0 +1,29 @@
+policy_module(docker_dbserver-service,1.0)
+
+virt_sandbox_domain_template(docker_dbserver-service);
+
+################# put audit2allow rules in here ##############
+require {
+	type mysqld_port_t;
+	type docker_dbserver-service_t;
+	type node_t;
+	class capability { setgid setuid chown };
+	class tcp_socket { accept bind create getattr listen name_bind node_bind setopt read write };
+	class netlink_route_socket { bind create getattr nlmsg_read read write };
+}
+
+#============= docker_dbserver-service_t ==============
+
+#pretty much all for mariadb 
+allow docker_dbserver-service_t self:capability { setuid setgid chown };
+allow docker_dbserver-service_t self:netlink_route_socket { create getattr bind write nlmsg_read read };
+allow docker_dbserver-service_t self:tcp_socket { create setopt bind listen accept getattr write read };
+allow docker_dbserver-service_t mysqld_port_t:tcp_socket name_bind;
+allow docker_dbserver-service_t node_t:tcp_socket node_bind;
+
+################# end audit2allow additions ##################
+
+# Permissive domains allow processes to not be blocked by SELinux
+# Remove this rule, when you are confident in the policy.
+#permissive docker_dbserver-service_t;
+

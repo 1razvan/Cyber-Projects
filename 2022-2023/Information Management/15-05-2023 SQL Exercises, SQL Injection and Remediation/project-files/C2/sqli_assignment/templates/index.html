@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>{{ this_title }}</h2>
+
+<h3>WM243 INFORMATION MANAGEMENT -- Assignment 2</h3>
+<h3>Case 2: SQL injection</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <td>Initialise PostgreSQL DB - Ensure PostgreSQL is running, the sqlinj database and role has been created (see exercise instructions) and then click this link to initialist the database.</td>
+            <td><a href=/init>Initialise DB</a></td>
+        </tr>
+        <tr>
+            <td><div class=h-divider></div></td>
+        </tr>
+{#        <tr>#}
+{#            <td>Products List</td>#}
+{#            <td><a href=/products>Show Product List - display a list of the products</a></td>#}
+{#        </tr>#}
+        <tr>
+            <td>Search Employee</td>
+            <td><a href=/search>Search by Employee name - simple search facility for searching Employees.</a></td>
+        </tr>
+        <tr>
+            <td><div class=h-divider></div></td>
+        </tr>
+    
+    	<tr>
+            <td>Authentication Bypass - Simple authentication bypass. Login into the website without using correct username and password.</td>
+            <td><a href=/login>Login</a></td>
+        </tr>
+		<tr>
+            <td>Forgot password</td>
+            <td><a href=/forgot>Retrieve Password</a></td>
+        </tr>
+{#		<tr>#}
+{#            <td>Data Exfiltration I - Use the searchstr form variable to join data from appusers table for the application. #}
+{#                (Try to avoid peeking at the back end database!)</td>#}
+{#            <td><a href=/search/tablejoin>Joining Tables</a></td>#}
+{#        </tr>#}
+<!--        
+		<tr>
+            <td>Data Exfiltration II - Use the searchstr form variable to infer data from the appusers table using blind SQL injection.
+                (Try to avoid peeking at the back end database!)</td>
+            <td><a href=/search/blind>Blind SQL Injection</a></td>
+        </tr>
+		<tr>
+            <td>Data Exfiltration III - Use the searchstr form variable to inject data that will result in the credentials of an application user 
+                set to the hostname of an external DNS service via an nslookup query (see notes)</td>
+            <td><a href=/search/oob>Out of Bands Exfiltration</a></td>
+        </tr>
+--!>        
+    </table>
+</div>
+
+{% endblock %}

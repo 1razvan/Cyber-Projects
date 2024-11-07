@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>{{ this_title }}</h2>
+
+<form method='POST' action='login'>
+    <table>
+        <tr>
+            <td>Enter user name</td>
+            <td><input type=text name="user" /></td>
+        </tr>
+        <tr>
+            <td>Enter password</td>
+            <td><input type=password name="pass" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type=submit /></td>
+    </table>
+
+</form>
+   Note: Your email is your username.
+{% endblock %}

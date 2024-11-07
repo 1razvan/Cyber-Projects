@@ -1,0 +1,18 @@
+##### BRAVO-4 TEAM #####
+##### Build Script README #####
+#
+##### INSTRUCTIONS:
+# The build script must be run in the scripts/ folder.
+# The build script asks for sudo privileges so that the strip-image script runs properly.
+#
+##### EXPLANATION:
+#
+# The script removes docker leftovers, such as containers, images and networks.
+# The script then creates the docker network "iss2023/bravo-4_n" with the subnet "198.51.100.0/24"
+# The script then builds the full webserver image, 
+# then cd's into the webserver folder and strips the full image
+#
+# The script then builds the full database image, 
+# then cd's into the dbserver folder and strips the full image
+#
+# The full webserver and full database images are deleted

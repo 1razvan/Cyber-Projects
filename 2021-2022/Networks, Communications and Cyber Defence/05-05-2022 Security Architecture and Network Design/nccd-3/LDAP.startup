@@ -1,0 +1,15 @@
+ifconfig eth0 192.168.3.2/24
+
+route add default gw 192.168.3.1
+
+useradd -p $(openssl passwd -crypt password) admin
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
+while true; do nc -lvp 389;done &
+while true; do nc -ulvp 389;done &
+
+iptables -P INPUT ACCEPT                                                           # stops random people from crashing in
+
+iptables -A INPUT ! -s 192.168.0.2 -p tcp --dport 22 -j DROP                       # accept anything from admin

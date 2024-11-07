@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Invoke the strip-image script and pass parameters (v5: 24.7MB)
+sudo ./strip-image  \
+  -i iss2023/bravo-4-web_i \
+  -p nginx \
+  -p php-fpm \
+  -f /usr/lib64/php/modules/mysqlnd_mysqli.so \
+  -f /usr/lib64/php/modules/mysqlnd.so \
+  -f /etc/php.d/mysqlnd.ini \
+  -f /etc/php.d/mysqlnd_mysqli.ini \
+  -f /usr/lib64/libnss_files.so.2 \
+  -f /usr/share/nginx/html/index.php \
+  -f /usr/share/nginx/html/action.php \
+  -f /etc/nginx/nginx.conf \
+  -f /etc/php.ini \
+  -f /etc/php-fpm.d/www.conf \
+  -f /etc/nginx/conf.d/php-fpm.conf \
+  -f /etc/passwd \
+  -f /etc/group \
+  -f /etc/shadow \
+  -f /var/log/php-fpm \
+  -f /var/log/nginx \
+  -f /var/lib/nginx \
+  -f /docker-entrypoint.sh \
+  -f /bin/bash \
+  -f /bin/mkdir \
+  -f /bin/chown \
+  -d Dockerfile \
+  -t iss2023/bravo-4-web-stripped_i \
+  -v \
+
+

@@ -1,0 +1,33 @@
+##### BRAVO-4 TEAM #####
+##### Run Script README #####
+#
+##### INSTRUCTIONS:
+# All run script must be run in the scripts/ folder.
+# The one-off-run-config script asks for sudo privileges so that the SELinux policies can be applied.
+#
+##### EXPLANATION:
+# The one-off-run-config script makes the dbserver and webserver .te SELinux policies into .pp files.
+# The one-off-run-config script installs the dbserver and webserver SELinux policies.
+# The one-off-run-config script confirms the dbserver and webserver SELinux policies are installed.
+#
+# The one-off-run-config script removes leftover docker volumes from a previous run.
+# The one-off-run-config creates a new docker volume called "bravo-4-db-volume".
+#
+# The one-off-run-config script runs the database server stripped image once 
+# with the container USER as "root" to initialise the iss2023 database and 
+# to write the /var/lib/mysql/ folder into the docker volume "bravo-4-db-volume".
+#
+# This container is then killed and removed.
+#
+# The one-off-run-config script then runs the database server stripped image once again,
+# the container runs as user "mysql"
+# this fixes the /var/lib/mysql/ 's folder and its files' permissions
+# this needs to be run here once, without seccomp
+# as it uses several syscalls that are not needed later for the repeated run script, i.e. chmod().
+#
+# The repeated-run script launches the dbserver and webserver with all security options
+# (SELinux, Seccomp and Capabilities)
+#
+# SELinux blocks some calls for usage on the udp_socket,
+# however they are not needed for the server's functionality.
+

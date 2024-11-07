@@ -1,0 +1,138 @@
+{
+	"defaultAction": "SCMP_ACT_ERRNO",
+	"archMap": [
+		{
+			"architecture": "SCMP_ARCH_X86_64",
+			"subArchitectures": [
+				"SCMP_ARCH_X86"
+			]
+		},
+		{
+			"architecture": "SCMP_ARCH_S390X",
+			"subArchitectures": [
+				"SCMP_ARCH_S390"
+			]
+		}
+	],
+	"syscalls": [
+		{
+			"names": [
+				"access",
+				"accept4",
+				"bind",
+				"capget",
+				"capset",
+				"chdir",
+				"close",
+				"dup2",
+				"execve",
+				"exit",
+				"faccessat",
+				"fallocate",
+				"fcntl",
+				"fdatasync",
+				"fstat",
+				"fstatfs",
+				"futex",
+				"getcwd",
+				"getdents64",
+				"getpeername",
+				"getpgrp",
+				"getppid",
+				"listen",
+				"lseek",
+				"mmap",
+				"mprotect",
+				"newfstatat",
+				"openat",
+				"pipe2",
+				"poll",
+				"prctl",
+				"pread64",
+				"pwrite64",
+				"read",
+				"readlink",
+				"recvfrom",
+				"rt_sigreturn",
+				"rt_sigprocmask",
+				"sendto",
+				"setgid",
+				"setgroups",
+				"shutdown",
+				"setsockopt",
+				"setuid",
+				"socket",
+				"wait4",
+				"write"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"comment": ""
+		},
+		{
+			"names": [
+				"arch_prctl"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"args": [],
+			"comment": "",
+			"includes": {
+				"arches": [
+					"amd64",
+					"x32"
+				]
+			}
+		},
+		{
+			"names": [
+				"clone"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"args": [
+				{
+					"index": 0,
+					"value": 2080505856,
+					"valueTwo": 0,
+					"op": "SCMP_CMP_MASKED_EQ"
+				}
+			],
+			"comment": "",
+			"includes": {},
+			"excludes": {
+				"caps": [
+					"CAP_SYS_ADMIN"
+				],
+				"arches": [
+					"s390",
+					"s390x"
+				]
+			}
+		},
+		{
+			"names": [
+				"clone"
+			],
+			"action": "SCMP_ACT_ALLOW",
+			"args": [
+				{
+					"index": 1,
+					"value": 2080505856,
+					"valueTwo": 0,
+					"op": "SCMP_CMP_MASKED_EQ"
+				}
+			],
+			"comment": "",
+			"includes": {
+				"arches": [
+					"s390",
+					"s390x"
+				]
+			},
+			"excludes": {
+				"caps": [
+					"CAP_SYS_ADMIN"
+				]
+			}
+		}
+	]
+}
+

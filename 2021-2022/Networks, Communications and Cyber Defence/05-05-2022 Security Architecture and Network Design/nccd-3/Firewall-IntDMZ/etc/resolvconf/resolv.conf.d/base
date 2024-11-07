@@ -1,0 +1,4 @@
+# fido additions
+nameserver 192.168.3.3
+search fido.cyber.test
+

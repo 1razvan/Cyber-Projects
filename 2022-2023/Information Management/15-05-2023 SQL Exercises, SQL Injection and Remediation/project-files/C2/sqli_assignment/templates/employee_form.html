@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>{{ this_title }}</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee[0]}}</td>
+                <td>{{ employee[1]}}</td>
+                <td>{{ employee[2]}}</td>
+                <td>{{ employee[3]}}</td>
+                <td>{{ employee[4]}}</td>
+                <td>{{ employee[5]}}</td>
+                <td>{{ employee[6]}}</td>
+
+            </tr>
+        {% endfor %} 
+    </table>
+</div>
+
+{#<a href=/orders/{{customer}}>View Your Orders</a>#}
+
+{% endblock %}
